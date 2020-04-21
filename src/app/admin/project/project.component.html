@@ -1,0 +1,20 @@
+<div class="card card-primary" [hidden]="hideDetails">
+
+    <div class="card-header">
+        <div>{{i}}</div>
+        
+      <div>{{project.userId}}</div>
+      <div>{{project.id | numberToWords}}<div>
+      <div>{{project.title}}</div>
+      <div>{{project.body}}</div>
+    </div>
+  
+    
+    <div class="card-footer">
+        
+        <button class="btn btn-info" (click)="onEditClick($event,i)" data-toggle="modal" data-target="#editModal">Edit</button>&nbsp;
+        <button class="btn btn-warning" (click)="onDeleteClick($event,i)" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        <a class="btn btn-primary" [routerLink]="['/projects','view',project.id]">LearnMore</a>
+    </div>
+  </div>
+  

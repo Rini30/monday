@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-sm bg-success navbar-dark">
+  <a href="navbar-brand" href="#">
+    Angular Task Manager
+  </a>
+  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#mynav">
+    <span class="navbar-toggle-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="mynav" >
+    <ul  class="navbar-nav mr-auto">
+    <li class="navbar-item" *ngIf="loginservice.currentUserName"> 
+      <a class="nav-link" routerLink="dashboard" >Dashboard</a>    
+    </li>
+    <li class="navbar-item" *ngIf="loginservice.currentUserName"> 
+      <a class="nav-link" [routerLink]="['/admin','about']">About</a>    
+    </li>
+    
+    <li class="navbar-item" *ngIf="loginservice.currentUserName"> 
+      <a class="nav-link" routerLink="projects">Projects</a>    
+    </li>
+    
+    
+    <li class="navbar-item" *ngIf="!loginservice.currentUserName"> 
+      <a class="nav-link" routerLink="login">Login</a>    
+    </li>
+    <li class="navbar-item" *ngIf="loginservice.currentUserName"> 
+      <a class="nav-link" [routerLink]="['/admin','masters']">Masters</a>    
+    </li>
+    <li class="navbar-item" *ngIf="loginservice.currentUserName"> 
+      <a class="nav-link" (click)="loginservice.logout()">LogOut</a>    
+    </li>
+    <li class="navbar-item" *ngIf="!loginservice.currentUserName"> 
+      <a class="nav-link" routerLink="signup">Sign up </a>    
+    </li>
+  </ul>
+  <form class="form-inlinr my-2 my-lg-0">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="search"><i class="=fa fa-search"></i></span>
+      </div>
+      <input type="text" class="form-control" placeholder="Search">
+
+    </div>
+    <button class="btn btn-warning my2-my-sm-0" type="button">Search</button>
+  </form>
+
+  </div>
+  
+
+</nav>
+<div class="container-fluid" [@routeAnimations]="getState(outlet)">
+
+<router-outlet #outlet='outlet'></router-outlet>
+</div>
+

@@ -1,0 +1,203 @@
+<h1>Users</h1>
+<div class="row">
+    <div class="col-8 mx-auto">
+      <div class="form-group form-row">
+        
+        <button CLASS="btn btn-secondary" (click)="onHideShowDetails($event)">Hide or Show Details</button>
+       
+
+        
+      </div>
+      <div class="form-group form-row">
+        <label class="col-form-label col-3">Search By ID</label>
+        <div class="col-9">
+          <div class="input-group">
+            <input type="text" placeholder="ID"(keyup)="onSearch($event)" class="form-control" id="txtSearchText" name="SearchText" [(ngModel)]="searchText">
+            <div class="card card-primary" *ngIf="showcard">                                                
+                <div>{{searchPost.userId}}</div>
+                <div>{{searchPost.id }}<div>
+                <div>{{searchPost.title}}</div>
+                <div>{{searchPost.body}}</div>
+              
+                      </div>
+        </div>
+
+      </div>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#newModal">Create Project</button>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let post of posts;let i =index">
+            
+            <app-project #prj [currentproject]="post" [recordedIndex]="i"
+            (editClick)="onEditClick($event,i)"
+            (deleteClick)="onDeleteClick($event,i)"           
+             ></app-project>
+
+          </div>
+
+        </div>
+    </div>
+
+
+    
+</div>
+<form #newForm="ngForm" appStatusValid>
+    <div class="modal" role="dialog" id="newModal">
+      <div class="modal-dialog">
+        <div class="modal-content" style="width:700px">
+          <div class="modal-header">
+            <div class="modal-title">New Project</div>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+  
+            <div class="form-group row">
+              <label for="txtNewProjectID" class="col-sm-4 col-form-label">User ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewProjectID" style="width:100px" class="form-control" placeholder="Project ID"
+                appValidateuserid="5" name="ProjectID" [(ngModel)]="newPosts.userId" #createPosts="ngModel">
+                <span class="text-danger" *ngIf="!createPosts.errors?.divisible">The number should be divisible by 5 </span>
+              </div>
+              <span class="text-danger" *ngIf="newForm.touched && newForm.errors?.StatusValidDirective">UserId and ID cant be same</span>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtNewProjectName" class="col-sm-4 col-form-label">ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewProjectName" class="form-control" placeholder="Project Name"
+                  name="ProjectName" [(ngModel)]="newPosts.id">
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtNewDateOfStart" class="col-sm-4 col-form-label">Title</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewDateOfStart" style="width:150px" class="form-control"
+                  placeholder="Title" name="DateOfStart" [(ngModel)]="newPosts.title">
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtTeamSize" class="col-sm-4 col-form-label">Body</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtTeamSize" style="width:150px" class="form-control" placeholder="Body"
+                  name="TeamSize" [(ngModel)]="newPosts.body">
+              </div>
+            </div>
+  
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-success" data-dismiss="modal" (click)="onSaveClick()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <form>
+    <div class="modal" role="dialog" id="editModal">
+      <div class="modal-dialog">
+        <div class="modal-content" style="width:700px">
+          <div class="modal-header">
+            <div class="modal-title">Edit Project</div>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+  
+            <div class="form-group row">
+              <label for="txtNewProjectID" class="col-sm-4 col-form-label">User ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewProjectID" style="width:100px" class="form-control-plain-text" placeholder="Project ID"
+                  name="ProjectID" [(ngModel)]="editPosts.userId" >
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtNewProjectName" class="col-sm-4 col-form-label">ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewProjectName" class="form-control" placeholder="Project Name"
+                  name="ProjectName" [(ngModel)]="editPosts.id" disabled="disabled">
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtNewDateOfStart" class="col-sm-4 col-form-label">Title</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewDateOfStart" style="width:150px" class="form-control"
+                  placeholder="Title" name="DateOfStart" [(ngModel)]="editPosts.title">
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtTeamSize" class="col-sm-4 col-form-label">Body</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtTeamSize" style="width:150px" class="form-control" placeholder="Body"
+                  name="TeamSize" [(ngModel)]="editPosts.body">
+              </div>
+            </div>
+  
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-success" data-dismiss="modal" (click)="onUpdateClick()">UPdate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <form>
+    <div class="modal" role="dialog" id="deleteModal">
+      <div class="modal-dialog">
+        <div class="modal-content" style="width:700px">
+          <div class="modal-header">
+            <div class="modal-title">Delete Project</div>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <div class="text warning"> Are you sure to delete?</div>
+  
+            <div class="form-group row">
+              <label for="txtNewProjectID" class="col-sm-4 col-form-label">User ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewProjectID" style="width:100px" class="form-control-plain-text" placeholder="Project ID"
+                  name="ProjectID" [(ngModel)]="deletePosts.userId" >
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtNewProjectName" class="col-sm-4 col-form-label">ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewProjectName" class="form-control" placeholder="Project Name"
+                  name="ProjectName" [(ngModel)]="deletePosts.id" disabled="disabled">
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtNewDateOfStart" class="col-sm-4 col-form-label">Title</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtNewDateOfStart" style="width:150px" class="form-control"
+                  placeholder="Title" name="DateOfStart" [(ngModel)]="deletePosts.title">
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="txtTeamSize" class="col-sm-4 col-form-label">Body</label>
+              <div class="col-sm-8">
+                <input type="text" id="txtTeamSize" style="width:150px" class="form-control" placeholder="Body"
+                  name="TeamSize" [(ngModel)]="deletePosts.body">
+              </div>
+            </div>
+  
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-success" data-dismiss="modal" (click)="onDeleteConfirm()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { DashboardService } from './dashboard.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { JwtInterceptorService } from './jwt-interceptor.service';
@@ -71,6 +72,23 @@ import { RepeaterDirective } from './repeater.directive';
     useClass:JwtInterceptorService,
     multi:true
   }],
+=======
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+>>>>>>> initial commit
   bootstrap: [AppComponent]
 })
 export class AppModule { }

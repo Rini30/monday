@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { CanDeactivateGuardService } from './can-deactivate-guard.service';
 import { ProjectdetailsComponent } from './admin/projectdetails/projectdetails.component';
 import { SignupComponent } from './signup/signup.component';
@@ -24,6 +25,16 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{useHash:true,preloadingStrategy:PreloadAllModules})],//enableTracing:true})],
+=======
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+>>>>>>> initial commit
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -4,8 +4,9 @@ import { ProjectComponent } from './../project/project.component';
 import { Posts } from './../../posts';
 import { ProjectsService } from './../../projects.service';
 
-import { Component, OnInit, ViewChild, ViewChildren,QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren,QueryList, TemplateRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Template } from '@angular/compiler/src/render3/r3_ast';
 
 
 
@@ -25,7 +26,10 @@ deleteIndex:number;
 searchBy:string="userId";
 searchText:any;
 showcard:boolean=false;
-jwc:Posts[];
+ifBlock:TemplateRef<any>;
+elseBlock:TemplateRef<any>;
+xyz:boolean;
+
 
   constructor(private projectService:ProjectsService) { }
 
@@ -39,6 +43,8 @@ jwc:Posts[];
     )
   }
   onSearch(event:any){
+
+    this.xyz=true;
     
   
     this.searchText=event.target.value;
@@ -46,17 +52,22 @@ jwc:Posts[];
     this.projectService.searchUsers()
     .subscribe(
       (response:Posts[])=>{
+        if(response[this.searchText-1]){
+          this.showcard=true;
         
         var p: Posts = new Posts();
         this.searchPost.userId=response[this.searchText-1].userId;
         this.searchPost.id=response[this.searchText-1].id;
         this.searchPost.title=response[this.searchText-1].title;
         this.searchPost.body=response[this.searchText-1].body;
-        this.showcard=true;
-        this.jwc=response.filter((p)=>{
-          return (p.id===this.searchText)
-        })
-        console.log(this.jwc)
+        
+        }
+
+        else{
+          this.showcard=false;
+          console.log("user not found!pls retry")
+        } 
+        
         
         
         

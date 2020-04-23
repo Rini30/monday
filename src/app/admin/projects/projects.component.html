@@ -12,15 +12,21 @@
         <label class="col-form-label col-3">Search By ID</label>
         <div class="col-9">
           <div class="input-group">
-            <input type="text" placeholder="ID"(keyup)="onSearch($event)" class="form-control" id="txtSearchText" name="SearchText" [(ngModel)]="searchText">
-            <div class="card card-primary" *ngIf="showcard">                                                
-                <div>{{searchPost.userId}}</div>
-                <div>{{searchPost.id }}<div>
-                <div>{{searchPost.title}}</div>
-                <div>{{searchPost.body}}</div>
-              
+            <input type="text" placeholder="ID"(keyup.enter)="onSearch($event)" class="form-control" id="txtSearchText" name="SearchText" [(ngModel)]="searchText">
+            <div *ngIf="xyz">
+            <p *ngIf = "showcard; then ifBlock; else elseBlock"></p>
+                  <ng-template class="card text-white bg-success mb-3" #ifBlock>
+                      <p>{{searchPost.id}}</p>
+                      <p>{{searchPost.userId}}</p>
+                      <p>{{searchPost.body}}</p>
+                      <p>{{searchPost.title}}</p>
+                  </ng-template>
+
+                  <ng-template #elseBlock class="card text-white bg-danger mb-3 ">
+                  <p> User not found.please try again. </p>
+                  </ng-template>
+                        </div>
                       </div>
-        </div>
 
       </div>
       <button class="btn btn-primary" data-toggle="modal" data-target="#newModal">Create Project</button>
